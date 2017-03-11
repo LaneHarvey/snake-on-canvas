@@ -24,4 +24,18 @@ var drawModule = (function () {
     ctx.fillStyle = 'blue';
     ctx.fillRect(score_text, 145, h - 5);
   }
+
+  var drawSnake = function() {
+    // Initially the body of the snake will be formed by 5 squares.
+    var length = 4;
+    snake = [];
+
+    // Using a for loop, we push the 5 elements inside the array(squares).
+    // Every element will have x = 0 and the y will take the value of the index.
+    for (var i = length; i >= 0; i--) {
+      snake.push({ x: i, y: 0 });
+    }
+  }
+
+  
 })
