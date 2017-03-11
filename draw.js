@@ -65,7 +65,52 @@ var drawModule = (function () {
       snakeX++;
     }
 
-    
+    // if the snake toouches the canvas path or itself, it will die!
+    // Therefore if x or y of an element of the snake don't fit inside the canvas, the game will be stopped.
+    // If the check collision is true, it means the snake has crashed into itself, stopping the game.
+    if (snakeX == -1 || snakeX == w / snakeSize  || snakeY == -1 || snakeY == h / snakeSize || check_collision(snakeX, snakeY, snake)) {
+      // Stop the game.
+
+      // Start button will be enabled again.
+      btn.removeAttribute('disabled', true);
+
+      // Clean the canvas.
+      ctx.clearRect(0, 0, w, h);
+      gameloop = clearInterval(gameloop);
+      return;
+    }
+
+    //If the snake eats food, it becomes longer, meaning you shouldn't pop out the last element of the array.
+    if (snakeX == food.x && snakeY == food.y) {
+      //Create a new square instead of moving the tail.
+      var tail = {
+        x: snakeX,
+        y: snakeY
+      };
+      score++;
+
+      // Create new food.
+      createFood();
+    } else {
+      // Pop out the last cell.
+      var tail = snake.pop();
+      tail.x = snakeX;
+      tail.y = snakeY;
+    }
+
+    // Puts the tail as the first cell.
+    snake.unshift(tail);
+
+    // For each element of the array, create a square using the bodySnake function we created.
+    for (var i = 0; i < snake.length; i++) {
+      bodySnake(snake[i].x, snake[i].y);
+    }
+
+    // Create food using the _pizza_ function.
+    pizza(food.x, food.y);
+
+    // Put the score text.
+    scoreText();
   }
 
   var createFood = function() {
