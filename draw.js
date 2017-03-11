@@ -37,7 +37,36 @@ var drawModule = (function () {
     }
   }
 
-  
+  var paint = function() {
+    // The space where the snake will move.
+    ctx.fillStyle = 'lightgray';
+    ctx.fillRect(0, 0, w, h);
+
+    // Give it a border.
+    ctx.strokeStyle = 'black';
+    ctx.strokeRect(0, 0, w, h);
+
+    // Disable the start button while you play.
+    btn.setAttribute('disabled', true);
+
+    var snakeX = snake[0].x;
+    var snakeY = snake[0].y;
+
+    // Make the snake move.
+    // Use the variable 'direction' to control the movement.
+    // We'll do this by popping out the last element of the array and shift it in on the top as the first element.
+    if (direction == 'right') {
+      snakeX++;
+    } else if (direction == 'left') {
+      snakeX--;
+    } else if (direction == 'up') {
+      snakeY--;
+    } else if (direction == 'down') {
+      snakeX++;
+    }
+
+    
+  }
 
   var createFood = function() {
     food = {
