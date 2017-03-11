@@ -37,6 +37,8 @@ var drawModule = (function () {
     }
   }
 
+  
+
   var createFood = function() {
     food = {
       x: Math.floor((Math.random() * 30) + 1),
@@ -52,6 +54,14 @@ var drawModule = (function () {
         food.x = Math.floor((Math.random() * 30) + 1),\;
         food.y = Math.floor((Math.random() * 30) + 1);
       }
+    }
+
+    var checkCollison = function(x, y, array) {
+      for (var i = 0; i < array.length; i++) {
+        if(array[i].x === x && array[i].y === y)
+        return true;
+      }
+      return false;
     }
   }
 })
